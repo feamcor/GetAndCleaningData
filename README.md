@@ -7,29 +7,32 @@ This project comprises of an R script that analyzes dataset from the **Human Act
 For more information about the dataset and the research behind it, click [here](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
 
 ## Installation
-You can clone this repo using the command below
-```bash
+You can clone this repo using the command below :
+```
 git clone https://github.com/feamcor/GetAndCleaningData.git
 ```
 or simply download the latest version of the [script](https://raw.githubusercontent.com/feamcor/GetAndCleaningData/master/run_analysis.R) to your machine.
 
 ## Dependencies
-The script depends on the following packages:
+The script depends on the following packages :
 
 *  [lubridate](https://cran.r-project.org/web/packages/lubridate/index.html) >= 1.3.3
 *  [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) >= 0.4.3
 
 ## How to Run
-Simply source the script from within the R interpreter
+Simply source the script from within the R interpreter :
 ```R
-setwd("<directory_where_script_is_located>")
+setwd("path/where/script/is/located")
 source("run_analysis.R")
 ```
-or run it straight from the command-line
-```bash
-cd <directory_where_script_is_located>
+
+Or run it straight from the command-line :
+```
+cd path/where/script/is/located
 Rscript run_analysis.R
 ```
+
+> **Note** : change path according to configuration of your machine.
 
 The script generates diagnostic messages to stderr in order to allow you to follow its progress. These messages can be supressed through R configuration or shell redirection.
 
@@ -66,11 +69,11 @@ downloaded 59.7 MB
 ```
 
 ## Processing
-The script will:
+The script will :
 
 *  Download the UCI HAR dataset zip file, in case it does not exist on the current working directory;
 *  Unzip it (a directory will be created); and
-*  Process its files according to the following requirements:
+*  Process its files according to the following requirements :
 
   1.  Merges the training and the test sets to create one data set.
   2.  Extracts only the measurements on the mean and standard deviation for each measurement. 
@@ -79,7 +82,7 @@ The script will:
   5.  From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 ## Results
-Two files, per run, will be generated in the current working directory:
+Two files, per run, will be generated in the current working directory :
 
 1.    ```run_analysis_<YYYYMMDD>_<HHMISS>_4.csv```
 2.    ```run_analysis_<YYYYMMDD>_<HHMISS>_5.txt```
