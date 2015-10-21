@@ -1,6 +1,3 @@
----
-output: html_document
----
 # **Get and Cleaning Data** course project
 ### Coursera Data Science Specialization
 
@@ -37,7 +34,7 @@ Rscript run_analysis.R
 The script generates diagnostic messages to stderr in order to allow you to follow its progress. These messages can be supressed through R configuration or shell redirection.
 
 ### Example of First Run
-```bash
+```
 ~/R/Get and Cleaning Data/Course Project$ Rscript run_analysis.R
 2015-10-21 15:30:46 Script started! timezone = America/Santiago
 trying URL 'https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip'
@@ -95,4 +92,4 @@ For information about the structure and content of these files, please refer to 
 File ```run_analysis.RData``` is generated whenever the script downloads the dataset zip file. It includes variable ```dataset.download```.
 
 ---
-&copy; [\@feamcor](https://github.com/feamcor)
+&copy; [feamcor](https://github.com/feamcor)
