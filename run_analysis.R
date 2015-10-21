@@ -8,7 +8,9 @@
 
 rm(list = ls()) # clear environment
 
-library(dplyr)
+library(methods)
+library(lubridate)
+library(dplyr, warn.conflicts = FALSE)
 
 start.time <- now()
 start.time.text <- format(start.time, "_%Y%m%d_%H%M%S")
@@ -20,7 +22,7 @@ script.name <- "run_analysis"
 ## are racing to develop the most advanced algorithms to attract new users.
 ## The data linked to from the course website represent data collected from
 ## the accelerometers from the Samsung Galaxy S smartphone.
-## A full description is available at the site where the data was obtained: 
+## A full description is available at the site where the data was obtained:
 ## http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 ##
 
@@ -78,8 +80,8 @@ observations <- rbind(observations.1, observations.2)
 message(paste(now(), "Merged", nrow(observations), "observations! (#1 completed)"))
 
 ##
-## 2. Extracts only the measurements on the mean and 
-##    standard deviation for each measurement. 
+## 2. Extracts only the measurements on the mean and
+##    standard deviation for each measurement.
 ##
 
 filename <- file.path(dirname, "features.txt")
@@ -141,7 +143,7 @@ final <- cbind(final, activity = activities.labels[activities$activity, 2])
 message(paste(now(), "Added descriptive activity into dataset (#3 completed)!"))
 
 ##
-## 4. Appropriately labels the data set with descriptive variable names. 
+## 4. Appropriately labels the data set with descriptive variable names.
 ##
 
 features.subset$feature <- sub("^t(.*?)-(mean|std)\\(\\)-([XYZ])",
@@ -173,7 +175,7 @@ colnames(final) <- features.subset$feature
 colnames(final)[nrow(features.subset) + 1] <- "activity"
 message(paste(now(), "Set descriptive feature names! (#4 completed)"))
 
-filename <- file.path(".", paste0(script.name, start.time.text, "_1.csv"))
+filename <- file.path(".", paste0(script.name, start.time.text, "_4.csv"))
 write.csv(final, file = filename, row.names = TRUE)
 message(paste(now(), "Generated output #1!", filename))
 
@@ -212,7 +214,7 @@ final.summary <- tbl_df(final) %>%
     group_by(activity, subject) %>%
     summarise_each(funs(mean))
 
-filename <- file.path(".", paste0(script.name, start.time.text, "_2.txt"))
+filename <- file.path(".", paste0(script.name, start.time.text, "_5.txt"))
 write.csv(final.summary, file = filename, row.names = FALSE)
 message(paste(now(), "Generated output #2! (#5 completed)", filename))
 
