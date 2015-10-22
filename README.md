@@ -99,7 +99,7 @@ Three files, per run, will be generated in the current working directory :
 
 **YYYYMMDD** and **HHMISS** correspond to the date and time (24hs) of when the script started its execution.
 
-For information about the structure and content of these files, please refer to the code book.
+For information about the structure and content of these files, please refer to the [code book](https://github.com/feamcor/GetAndCleaningData/blob/master/CODEBOOK.md).
 
 ### Download Date
 File ```run_analysis.RData``` is generated whenever the script downloads the dataset zip file. It includes variable ```dataset.download```.

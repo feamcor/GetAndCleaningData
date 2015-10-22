@@ -22,16 +22,16 @@ The files described in this code book resulted from manipulations done on top of
 
 ### Dataset
 
- Variable / Column   | Domain | Description
- ------------------- | ------ | -----------
- activity            | string, <br/> factor | Activity performed by the subject: <br/>- WALKING<br/>- WALKING_UPSTAIRS<br/>- WALKING_DOWNSTAIRS<br/>- SITTING<br/>- STANDING<br/>- LAYING
-subject              | integer, <br/> 1:30  | Subject identification
-device               | string, <br/> factor | Instrument of the device from where the signals were obtained: <br/>- acc (Accelerometer)<br/>- gyr (Gyroscope)
-domain               | string, <br/> factor | Domain on which signals were obtained: <br/>- time (Time)<br/>- freq (Frequency)
-source               | string, <br/> factor | Source from where acceleration signal was collected: <br/>- body (Body)<br/>- grav (Gravity)<br/>- jerk (Body Jerk)
-axis                 | string, <br/> factor | From which axis corresponds the signal obtained from the device's instrument: <br/>- x<br/>- y<br/>- z
-type                 | string, <br/> factor | Type of value described in the Signal variable: <br/>- mean (Average)<br/>- std (Standard Deviation)
-avg_signal           | double, <br/> -1:1   | Average of the signals obtained when grouped by each of the variables above
+Variable / Column   | Domain | Description
+------------------- | ------ | -----------
+activity            | string, <br/> factor | Activity performed by the subject: <br/>- WALKING<br/>- WALKING_UPSTAIRS<br/>- WALKING_DOWNSTAIRS<br/>- SITTING<br/>- STANDING<br/>- LAYING
+subject             | integer, <br/> 1:30  | Subject identification
+device              | string, <br/> factor | Instrument of the device from where the signals were obtained: <br/>- acc (Accelerometer)<br/>- gyr (Gyroscope)
+domain              | string, <br/> factor | Domain on which signals were obtained: <br/>- time (Time)<br/>- freq (Frequency)
+source              | string, <br/> factor | Source from where acceleration signal was collected: <br/>- body (Body)<br/>- grav (Gravity)<br/>- jerk (Body Jerk)
+axis                | string, <br/> factor | From which axis corresponds the signal obtained from the device's instrument: <br/>- x<br/>- y<br/>- z
+type                | string, <br/> factor | Type of value described in the Signal variable: <br/>- mean (Average)<br/>- std (Standard Deviation)
+avg_signal          | double, <br/> -1:1   | Average of the signals obtained when grouped by each of the variables above
 
 ## File ```run_analysis_<YYYYMMDD>_5.csv```
 
@@ -45,16 +45,16 @@ avg_signal           | double, <br/> -1:1   | Average of the signals obtained wh
 
 ### Dataset
 
- Variable / Column   | Domain | Description
- ------------------- | ------ | -----------
- activity            | string, <br/> factor | Activity performed by the subject: <br/>- WALKING<br/>- WALKING_UPSTAIRS<br/>- WALKING_DOWNSTAIRS<br/>- SITTING<br/>- STANDING<br/>- LAYING
-subject              | integer, <br/> 1:30  | Subject identification
-signal               | double, <br/> -1:1   | Average or standard deviation signal obtained from device's instrument
-device               | string, <br/> factor | Instrument of the device from where the signals were obtained: <br/>- acc (Accelerometer)<br/>- gyr (Gyroscope)
-domain               | string, <br/> factor | Domain on which signals were obtained: <br/>- time (Time)<br/>- freq (Frequency)
-source               | string, <br/> factor | Source from where acceleration signal was collected: <br/>- body (Body)<br/>- grav (Gravity)<br/>- jerk (Body Jerk)
-axis                 | string, <br/> factor | From which axis corresponds the signal obtained from the device's instrument: <br/>- x<br/>- y<br/>- z
-type                 | string, <br/> factor | Type of value described in the Signal variable: <br/>- mean (Average)<br/>- std (Standard Deviation)
+ Variable / Column  | Domain | Description
+ ------------------ | ------ | -----------
+activity            | string, <br/> factor | Activity performed by the subject: <br/>- WALKING<br/>- WALKING_UPSTAIRS<br/>- WALKING_DOWNSTAIRS<br/>- SITTING<br/>- STANDING<br/>- LAYING
+subject             | integer, <br/> 1:30  | Subject identification
+signal              | double, <br/> -1:1   | Average or standard deviation signal obtained from device's instrument
+device              | string, <br/> factor | Instrument of the device from where the signals were obtained: <br/>- acc (Accelerometer)<br/>- gyr (Gyroscope)
+domain              | string, <br/> factor | Domain on which signals were obtained: <br/>- time (Time)<br/>- freq (Frequency)
+source              | string, <br/> factor | Source from where acceleration signal was collected: <br/>- body (Body)<br/>- grav (Gravity)<br/>- jerk (Body Jerk)
+axis                | string, <br/> factor | From which axis corresponds the signal obtained from the device's instrument: <br/>- x<br/>- y<br/>- z
+type                | string, <br/> factor | Type of value described in the Signal variable: <br/>- mean (Average)<br/>- std (Standard Deviation)
 
 ## File ```run_analysis_<YYYYMMDD>_4.csv```
 
