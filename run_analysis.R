@@ -10,6 +10,7 @@ rm(list = ls()) # clear environment
 
 library(methods)
 library(lubridate)
+library(reshape2)
 library(dplyr, warn.conflicts = FALSE)
 
 start.time <- now()
@@ -140,44 +141,47 @@ activities <- rbind(activities.1, activities.2)
 message(paste(now(), "Merged", nrow(activities), "activity observations!"))
 
 final <- cbind(final, activity = activities.labels[activities$activity, 2])
-message(paste(now(), "Added descriptive activity into dataset (#3 completed)!"))
+message(paste(now(), "Added descriptive activity into dataset! (#3 completed)"))
 
 ##
 ## 4. Appropriately labels the data set with descriptive variable names.
 ##
 
-features.subset$feature <- sub("^t(.*?)-(mean|std)\\(\\)-([XYZ])",
-                               "\\L\\3_time_\\2\\1",
-                               features.subset$feature,
-                               perl = TRUE)
-features.subset$feature <- sub("^f(.*?)-(mean|std)\\(\\)-([XYZ])",
-                               "\\L\\3_freq_\\2\\1",
-                               features.subset$feature,
-                               perl = TRUE)
-features.subset$feature <- sub("mean",
-                               "avg",
-                               features.subset$feature,
-                               perl = TRUE)
-features.subset$feature <- gsub("(body|jerk|gravity)",
-                                "_\\1",
-                                features.subset$feature,
-                                perl = TRUE)
-features.subset$feature <- sub("acc",
-                               "_accelerometer",
-                               features.subset$feature,
-                               perl = TRUE)
-features.subset$feature <- sub("gyro",
-                               "_gyroscope",
-                               features.subset$feature,
-                               perl = TRUE)
-
-colnames(final) <- features.subset$feature
+features.subset$tidy <- features.subset$feature
+features.subset$tidy <- sub("^(.*?)Acc(.*?)$",
+                            "acc_\\1\\2",
+                            features.subset$tidy, perl = TRUE)
+features.subset$tidy <- sub("^(.*?)Gyro(.*?)$",
+                            "gyr_\\1\\2",
+                            features.subset$tidy, perl = TRUE)
+features.subset$tidy <- sub("^(acc_|gyr_)t(.*?)$",
+                            "\\1time_\\2",
+                            features.subset$tidy, perl = TRUE)
+features.subset$tidy <- sub("^(acc_|gyr_)f(.*?)$",
+                            "\\1freq_\\2",
+                            features.subset$tidy, perl = TRUE)
+features.subset$tidy <- sub("^(acc_|gyr_)(time_|freq_)BodyJerk(.*?)$",
+                            "\\1\\2jerk_\\3",
+                            features.subset$tidy, perl = TRUE)
+features.subset$tidy <- sub("^(acc_|gyr_)(time_|freq_)Body(.*?)$",
+                            "\\1\\2body_\\3",
+                            features.subset$tidy, perl = TRUE)
+features.subset$tidy <- sub("^(acc_|gyr_)(time_|freq_)Gravity(.*?)$",
+                            "\\1\\2grav_\\3",
+                            features.subset$tidy, perl = TRUE)
+features.subset$tidy <- sub("^(acc_|gyr_)(time_|freq_)(jerk_|body_|grav_)(.*?)-([XYZ])$",
+                            "\\1\\2\\3\\L\\5_\\4",
+                            features.subset$tidy, perl = TRUE)
+features.subset$tidy <- sub("^(acc_|gyr_)(time_|freq_)(jerk_|body_|grav_)([xyz]_)-(mean|std).*?$",
+                            "\\1\\2\\3\\4\\5",
+                            features.subset$tidy, perl = TRUE)
+colnames(final) <- features.subset$tidy
 colnames(final)[nrow(features.subset) + 1] <- "activity"
 message(paste(now(), "Set descriptive feature names! (#4 completed)"))
 
 filename <- file.path(".", paste0(script.name, start.time.text, "_4.csv"))
-write.csv(final, file = filename, row.names = TRUE)
-message(paste(now(), "Generated output #1!", filename))
+write.csv(final, file = filename, row.names = FALSE)
+message(paste(now(), "Generated output!", filename))
 
 ##
 ## 5. From the data set in step 4, creates a second, independent tidy data set
@@ -210,13 +214,32 @@ message(paste(now(), "Merged", nrow(subjects), "subject observations!"))
 final <- cbind(final, subject = subjects)
 message(paste(now(), "Added subject into dataset!"))
 
-final.summary <- tbl_df(final) %>%
-    group_by(activity, subject) %>%
-    summarise_each(funs(mean))
+tidy <- melt(final, id.vars = c("activity", "subject"), value.name = "signal")
+tidy.vars <- data.frame(do.call("rbind",
+                                strsplit(as.character(tidy$variable),
+                                         split = "_",
+                                         fixed = TRUE)))
+tidy$variable <- NULL
+colnames(tidy.vars) <- c("device", "domain", "source", "axis", "type")
+tidy <- cbind(tidy, tidy.vars)
+message(paste(now(),
+              "Tidy", ncol(tidy), "variables and",
+              nrow(tidy), "observations generated!"))
 
-filename <- file.path(".", paste0(script.name, start.time.text, "_5.txt"))
-write.csv(final.summary, file = filename, row.names = FALSE)
-message(paste(now(), "Generated output #2! (#5 completed)", filename))
+filename <- file.path(".", paste0(script.name, start.time.text, "_5.csv"))
+write.csv(tidy, file = filename, row.names = FALSE)
+message(paste(now(), "Generated output!", filename))
+
+tidy.summary <- tbl_df(tidy) %>%
+     group_by(activity, subject, device, domain, source, axis, type) %>%
+     summarise(avg_signal = mean(signal))
+message(paste(now(),
+              "Summary of tidy dataset of", ncol(tidy.summary), "variables",
+              "and", nrow(tidy.summary), "observations generated!"))
+
+filename <- file.path(".", paste0(script.name, start.time.text, ".txt"))
+write.table(tidy.summary, file = filename, row.names = FALSE)
+message(paste(now(), "Generated output! (#5 completed)", filename))
 
 message(paste(now(), "Script finished!"))
 #rm(list = ls())
