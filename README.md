@@ -1,10 +1,12 @@
 # **Get and Cleaning Data** course project
-### Coursera Data Science Specialization
+### Coursera Data Science Specialization (getdata-033)
 
 ## Introduction
 This project comprises of an R script that analyzes dataset from the **Human Activity Recognition** (HAR) database that was built from the recordings of 30 subjects performing **Activities of Daily Living** (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors.
 
-For more information about the dataset and the research behind it, click [here](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
+For more information about the UCI HAR research, click [here](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
+
+For more information about the UCI HAR dataset, click [here](https://raw.githubusercontent.com/feamcor/GetAndCleaningData/master/UCI%20HAR%20Dataset%20README.txt).
 
 ## Installation
 You can clone this repo using the command below :
@@ -80,9 +82,9 @@ The script will :
 *  Process its files according to the following requirements :
 
   1.  Merges the training and the test sets to create one data set.
-  2.  Extracts only the measurements on the mean and standard deviation for each measurement. 
+  2.  Extracts only the measurements on the mean and standard deviation for each measurement.
   3.  Uses descriptive activity names to name the activities in the data set.
-  4.  Appropriately labels the data set with descriptive variable names. 
+  4.  Appropriately labels the data set with descriptive variable names.
   5.  From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 ## Results
@@ -103,4 +105,4 @@ For information about the structure and content of these files, please refer to 
 File ```run_analysis.RData``` is generated whenever the script downloads the dataset zip file. It includes variable ```dataset.download```.
 
 ---
-&copy; [feamcor](https://github.com/feamcor)
+By [feamcor](https://github.com/feamcor).
