@@ -8,6 +8,13 @@
 
 rm(list = ls()) # clear environment
 
+packages.required <- c("methods", "lubridate", "reshape2", "dplyr")
+packages.missing <- packages.required[!(packages.required %in% installed.packages()[, "Package"])]
+if(length(packages.missing) > 0) {
+    message(paste(now(), "WARNING: Some required packages are missing and will be installed!"))
+    install.packages(packages.missing)
+}
+
 library(methods)
 library(lubridate)
 library(reshape2)
